@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charest="utf-8">
+ <meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>【原神】4opの確率に関する統計学的な考察【聖遺物】</title>
+ <link rel="stylesheet" href=css/style.css>
+</head>
+<body>
+
+<div class="container">
+  <div class="main">
+  <h1 class="title">【原神】4opの確率に関する統計学的な考察【聖遺物】</h1>
+   <details>
+    <summary>目次</summary>
+     <ul>
+      <li> <a href="#Preface">前書き</a> </li>
+      <li> <a href="#Thanks">謝辞</a> </li>
+      <li> <a href="#Premise">前提</a> </li>
+       <ul>
+        <li> <a href="#Statistics">統計学</a></li>
+         <ul>
+          <li> <a href="#Pvalue">P値</a> </li>
+          <li> <a href="#chi-squareTest">カイ二乗検定</a> </li>
+         </ul>
+         <li> <a href="#significance">この記事の意義</a> </li>
+       </ul>
+      <li> <a href="#Overview">要約</a> </li>
+       <ul> 
+        <li> <a href="#Overview1">全体の結果</a> </li>
+        <li> <a href="#Overview2">予想</a> </li>
+       </ul>
+      <li> <a href="#MainTopic">本題</a> </li>
+       <ul>
+        <li> <a href="#subop1">聖遺物ごとに4opの出現率に差はあるか？</a> </li>
+         <ul>
+          <li> <a href="#subop21">剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのか？</a> </li>
+          <li> <a href="#subop22">秘境から出る聖遺物の中で4opが出現する確率が違う聖遺物はあるのか？</a> </li>
+          <li> <a href="#subop23">聖遺物廻聖と秘境から手に入る聖遺物における4opの出現確立に差はあるか?</a> </li>
+          <li> <a href="#subop24">聖遺物廻聖と剣闘士・楽団における4opの出現確立に差はあるか?</a> </li>
+          <li> <a href="#subop25">秘境の聖遺物と聖遺物廻聖の4opの確率を推定</a> </li>
+         </ul>
+       </ul>
+      <li> <a href="#Summary">総括</a> </li>
+      <li> <a href="#References">引用文献</a> </li>
+     </ul>
+    </details>
+
+ <h1 id="Preface">前書き</h1>
+  <p>
+   <a href="#Overview">要約</a>だけで分かるようにしているはずです。<br>
+   結論だけ知りたい方は<a href="#Summary">総括</a>を、軽く知りたい人は<a href="#Overview">要約</a>を見てください。<br>
+   統計学に詳しい方最低限は統計学について勉強しましたが、ほぼ独学ですので間違っていれば軽い気持ちで、ご指摘等していただけると幸いです。<br>
+   1人で書いたため「分かりにくい」「間違っている」「ミスがあった」などあればご指摘ください。
+  </p>
+ <h1 id="Thanks">謝辞</h1>
+  <p>
+   この結果を出すためには多くのデータが必要であり、そのデータを既に集めていた<br>
+   kinositaさんのとShino1154さんの2名のデータを使用させていただきました。<br>
+   kinositaさんのデータ<a href="#quote_1">[1]</a><a class="anchor_super" name="quote_1_a"></a>、Shino1154さんのデータ<a href="#quote_2">[2]</a><a class="anchor_super" name="quote_2_a"></a><br>
+   この膨大なデータの蓄積は非常に貴重かつ非常に労力を要するものであり、<br>
+   無作為抽出だと考えられる、これらのデータなくしては、<br>
+   私は初めの1文字も書けなかったことをここに明言する。<br>
+   また、聖遺物廻聖に関してはマグロヘッドさんの聖遺物廻聖のデータも使用した。<a href="#quote_3">[3]</a><a class="anchor_super" name="quote_3_a"></a>
+   </p>
+   <p>
+    <span class="bigger">3名のアカウント</span><br>
+     kinositaさん <a href="https://www.hoyolab.com/accountCenter/postList?id=79020095">HoYoLAB</a><br>
+     Shino1154さん <a href="https://www.hoyolab.com/accountCenter/postList?id=6553390">HoYoLAB</a>
+     <a href="https://twitter.com/Shino1154">X(旧Twitter)</a><br>
+     マグロヘッドさん <a href="https://www.youtube.com/@maguro-head">YouTebe</a>
+     <a href="https://twitter.com/magurohead270">X(旧Twitter)</a><br>
+    </p>
+   <p>本記事は下記のデータを加工したものである。</p>
+   <a class="anchor_super" name="tab1"></a>
+<details>
+ <summary>この記事で使用した全データ</summary>
+ このデータは下記のリンク元のデータをまとめたものであることをここに明記する
+  <div class="box_2">
+   <table>
+    <caption>この記事で使用した全データ</caption>
+    <thead>
+     <tr class="td_border">
+      <th>データ採集者</th> <th colspan="2"  class="td_border">kinosita</th> <th colspan="2"  class="td_border">Shino1154</th> <th colspan="2"  class="td_border">マグロヘッド</th>
+     </tr>
+     <tr class="td_border">
+      <th class="td_left">初期OP数</th> <th class="td_border">3OP</th> <th class="td_border">4OP</th> <th class="td_border">3OP</th> <th class="td_border">4OP</th> <th class="td_border">3OP</th> <th class="td_border">4OP</th>
+     </tr>
+    </thead>
+    <tbody class="td_border">
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">剣闘士のフィナーレ</td> <td class="td_number">157</td> <td class="td_number">77</td> <td class="td_number">183</td> <td class="td_number">88</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">大地を流浪する楽団</td> <td class="td_number">139</td> <td class="td_number">69</td> <td class="td_number">184</td> <td class="td_number">92</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">雷のような怒り</td> <td class="td_number"></td> <td class="td_number"></td> <td class="td_number">32</td> <td class="td_number">12</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">雷を鎮める尊者</td> <td class="td_number"></td> <td class="td_number"></td> <td class="td_number">39</td> <td class="td_number">11</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">翠緑の影</td> <td class="td_number">32</td> <td class="td_number">9</td> <td class="td_number">75</td> <td class="td_number">22</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">愛される少女</td> <td class="td_number">34</td> <td class="td_number">7</td> <td class="td_number">68</td> <td class="td_number">21</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">燃え盛る炎の魔女</td> <td class="td_number">136</td> <td class="td_number">36</td> <td class="td_number">157</td> <td class="td_number">35</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">烈火を渡る賢者</td> <td class="td_number">141</td> <td class="td_number">35</td> <td class="td_number">146</td> <td class="td_number">31</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">血染めの騎士道</td> <td class="td_number">59</td> <td class="td_number">16</td> <td class="td_number">65</td> <td class="td_number">14</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">旧貴族のしつけ</td> <td class="td_number">52</td> <td class="td_number">19</td> <td class="td_number">68</td> <td class="td_number">18</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">悠久の盤岩</td> <td class="td_number">46</td> <td class="td_number">16</td> <td class="td_number">100</td> <td class="td_number">17</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">逆飛びの流星</td> <td class="td_number">41</td> <td class="td_number">12</td> <td class="td_number">89</td> <td class="td_number">32</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">氷風を彷徨う勇士</td> <td class="td_number">155</td> <td class="td_number">35</td> <td class="td_number">75</td> <td class="td_number">19</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">沈淪の心</td> <td class="td_number">139</td> <td class="td_number">51</td> <td class="td_number">73</td> <td class="td_number">11</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">仙岩牢固</td> <td class="td_number">147</td> <td class="td_number">40</td> <td class="td_number">91</td> <td class="td_number">29</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">蒼白の炎</td> <td class="td_number">136</td> <td class="td_number">33</td> <td class="td_number">87</td> <td class="td_number">26</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">追憶のしめ縄</td> <td class="td_number">213</td> <td class="td_number">53</td> <td class="td_number">257</td> <td class="td_number">58</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">絶縁の旗印</td> <td class="td_number">185</td> <td class="td_number">43</td> <td class="td_number">258</td> <td class="td_number">71</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">華館夢醒形骸記</td> <td class="td_number">232</td> <td class="td_number">55</td> <td class="td_number">143</td> <td class="td_number">33</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">海染硨磲</td> <td class="td_number">227</td> <td class="td_number">46</td> <td class="td_number">161</td> <td class="td_number">36</td> <td class="td_number"></td> <td class="td_number"></td> </tr>
+     <tr class="td_border"> <td class="td_left"  style="width:160px;">聖遺物廻聖</td> <td class="td_number">657</td> <td class="td_number">312</td> <td class="td_number"></td> <td class="td_number"></td> <td class="td_number">702</td> <td class="td_number">338</td> </tr>
+   </tbody>
+  </table>
+ <p><span class="bigger">データの引用元</span></p>
+  <ul>
+   <li><a class="anchor_super" name="quote_1_b"></a>ver2.9までの聖遺物データ(著者:kinosita)(参照日:2023-02-15)<a href="#quote_1">[1]</a></li>
+   <li><a class="anchor_super" name="quote_2_b"></a>【聖遺物統計】重要データ一覧【3000個記念】(著者:Shino1154)(参照日:2023-02-15)<a href="#quote_2">[2]</a></li>
+   <li><a class="anchor_super" name="quote_3_b"></a>【原神】新システム「聖遺物廻聖」は４オプションが出やすい！？統計をとった結果を公開します【げんしん】(著者:マグロヘッド)(該当動画時間1:18~1:45)(参照日:2023-02-15)<a href="#quote_3">[3]</a></li>
+  </ul>
+ </div>
+</details>
+ <h1 id="Premise">前提</h1>
+  <p>聖遺物サブステータスが、<br>
+   <span class="bigger">初期から3個あるものを3op</span><br>
+   <span class="bigger">初期から4個あるものを4op</span><br>
+  と呼びます。<br>
+  また大文字で3OP、4OPと記載するのが一般的だと思うが<br>可読性の低下を招いている（40や30に見えてしまう）ので3op、4opと記載する。
+  <!--画像で4OPと3OPの画像が欲しい-->
+  </p>
+  <p>以後、聖遺物に関しては略称を用いるため、略称の一覧表を作成</p>
+  <details>
+   <summary>聖遺物などの略称</summary>
+   <div class="box_2">
+    <table>
+     <tbody>
+     <tr> <td>剣闘士のフィナーレ</td> <td>→</td> <td>剣闘士</td></tr>
+     <tr> <td>大地を流浪する楽団</td> <td>→</td> <td>楽団</td></tr>
+     <tr> <td>雷のような怒り</td> <td>→</td> <td>雷怒り</td></tr>
+     <tr> <td>雷を鎮める尊者</td> <td>→</td> <td>尊者</td></tr>
+     <tr> <td>翠緑の影</td> <td>→</td> <td>翠緑</td></tr>
+     <tr> <td>愛される少女</td> <td>→</td> <td>少女</td></tr>
+     <tr> <td>燃え盛る炎の魔女</td> <td>→</td> <td>魔女</td></tr>
+     <tr> <td>烈火を渡る賢者</td> <td>→</td> <td>火渡り</td></tr>
+     <tr> <td>血染めの騎士道</td> <td>→</td> <td>血染め</td></tr>
+     <tr> <td>旧貴族のしつけ</td> <td>→</td> <td>旧貴族</td></tr>
+     <tr> <td>悠久の盤岩</td> <td>→</td> <td>悠久</td></tr>
+     <tr> <td>逆飛びの流星</td> <td>→</td> <td>逆飛び</td></tr>
+     <tr> <td>氷風を彷徨う勇士</td> <td>→</td> <td>氷風</td></tr>
+     <tr> <td>沈淪の心</td> <td>→</td> <td>沈淪</td></tr>
+     <tr> <td>仙岩牢固</td> <td>→</td> <td>仙岩</td></tr>
+     <tr> <td>蒼白の炎</td> <td>→</td> <td>蒼白</td></tr>
+     <tr> <td>追憶のしめ縄</td> <td>→</td> <td>しめ縄</td></tr>
+     <tr> <td>絶縁の旗印</td> <td>→</td> <td>絶縁</td></tr>
+     <tr> <td>華館夢醒形骸記</td> <td>→</td> <td>華館</td></tr>
+     <tr> <td>海染硨磲</td> <td>→</td> <td>海染</td></tr>
+     <tr> <td>聖遺物廻聖</td> <td>→</td> <td>廻聖</td></tr>
+     </table>
+    </tbody>
+    </div>
+  </details>
+<h2 id="Statistics">統計学</h2>
+ <p>統計学では慣例的にp=0.1やp=0.05、p=0.01などを基準に差があるかないかを決めている。<br>
+  そこで今回はその慣例にならい<br>
+  p>0.05の時は「傾向が見られた」<br>
+  p>0.01の時は「有意差が出た」と表現する。<br>
+  ここで多くの慣例で用いられるp=0.05を有意水準にしなかったのは検定を20回以上行う予定があったためである。<br>
+  つまり有意水準が0.05だと誤った結論を導き出してしまう可能性が十分にあるので、0.01を有意水準とした。</p>
+<h3 id="Pvalue">P値</h3>
+ <p>
+  ここでpなる良く分からない文字が出てきたので少しだけP値について説明する。<br>
+  P値とは、統計的仮説検定において、その結果の起こりやすさだと思ってもらえれば良い。<br>
+  詳しく知りたい人は独自に調べていただきたい。<br>
+  P値の解説だけで記事が書けるだろうが、ここでは大きく取り上げない。<br>
+   <span class="bigger">統計を知らない人が知っておくべきことは</span><br>
+   <span class="bigger">「Pが小さければ小さいほど、それが偶然起きるとは考えずらい」</span>ということ。
+  そしてp=0.05なら5％の確率でそのことが起きると思ってもらって良い。（正確には違うが許して頂きたい）<br>
+  また、pが0.05より大きいからと言って「差がない」とは言えないことにも注意してほしい。<br>
+  例えばもっと多くのデータを集めれば有意差がでる場合もある。<br>
+  <details>
+   <summary>例</summary>
+    <div class="box_2">
+     <p>
+      コイントスをした時に3連続表がでた場合は偶然かもしれないが、100連続表がでれば偶然と呼ぶのはかなり無理があるだろう<br>
+      つまり3連続コイントスが表だと(1/2)^3=1/8であり8回に1程度おきるため偶然の範囲内だろう<br>
+      しかし100連続コイントスが表だと(1/2)^100であり、その確率はおよそ127穣回に1でおきる、これを偶然と言い張るのは無理がある<br>
+      このように全て表であったとしても、回数を重ねると「偶然かも？」と言えたことが偶然とは言えないくなる<br>
+    </p>
+   </div>
+  </details>
+ </p>
+<h3 id="chi-squareTest"><ruby>カイ二乗検定<rp>(</rp><rt>かいにじょうけんてい</rt><rp>)</rp></ruby></h3>
+ <p>
+ 本記事ではピアソンのカイ二乗検定のこと。<br>
+ 多くの場合カイ二乗検定と呼ぶとピアソンのカイ二乗検定のことをさす。<br>
+ 簡単に言えば「集団間で、ある区分に差があるかを調べる方法」だと思えば良い。<br>
+ とはいえ、これでは分かりにくいので例を上げる<br>
+ 例えば2つのサイコロを振ってみて2つのサイコロの出る目に（欠けているなどの理由で）偏りがないかを調べれる。<br>
+ （Google スプレッドシートでは関数CHITESTで比較的簡単に調べれる）<br>
+ </p>
+<h2 id="significance">この記事の意義</h2>
+ <p>
+ kinositaさんが既に記事にしており<a href="#quote_1">[1]</a><a class="anchor_super" name="quote_1_x"></a><a href="#quote_5">[5]</a><a class="anchor_super" name="quote_5_x"></a>とShino1154さんも記事にしている<a href="#quote_2">[2]</a><a class="anchor_super" name="quote_2_x"></a><a href="#quote_4">[4]</a><a class="anchor_super" name="quote_4_x"></a><a href="#quote_6">[6]</a><a class="anchor_super" name="quote_6_x"></a>、
+ 更にはマグロヘッドさんも動画にしている<a class="anchor_super" name="quote_3_x"></a><a href="#quote_3">[3]</a>が、<br>
+ 私はカイ二乗検定を行いP値を求めることにより、分かりやすいようにまとめた。<br>
+ 大枠の結論はkinositaさんとShino1154さんとが既に出しており今回の検定結果はそれらを肯定するものであり、目新しい結論はないが数値で裏付けするのは意味がある。<br>
+ またP値で示したことは統計をみたことがある人にとっても見やすくなっているはずだ。
+</p>
+<h1 id="Overview">要約</h1>
+ <ol start="0">
+  <li>聖遺物の4op出現確率が聖遺物の種類ごとに違う可能性が既に指摘されている。<a href="#quote_4">[4]</a><a class="anchor_super" name="quote_4_x"></a><a href="#quote_5">[5]</a><a class="anchor_super" name="quote_5_x"></a></ul>
+  <li>見えていない要因で他にも出現確率が違わないか、kinositaさんとShino1154さんのデータを比べて不自然に偏った確率になってないかを調べた。<a href="#subop21">詳細</a></li>
+    　<span class="p_result">結果</span>　特に偏りは見られなかった。
+  <li> 剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのかを調べた。<a href="#subop22">詳細</a></li>
+   　<span class="p_result">結果</span>　剣闘士・楽団と秘境間では差が見られた。
+  <li>秘境の聖遺物間で偏りがないか調べた。<a href="#subop22">詳細</a></li>
+   　<span class="p_result">結果</span>　偏りは見つけれなかった。よって秘境での4opの出現確率は差がない。
+  <li>秘境からの聖遺物と聖遺物廻聖の4opの出現確率を調べた。<a href="#subop23">詳細</a></li>
+   　<span class="p_result">結果</span>　秘境と聖遺物廻聖とは4opの出現確率は差があった。
+  <li>剣闘士・楽団と聖遺物廻聖に差はあるのか？<a href="#subop24">詳細</a></li>
+   　<span class="p_result">結果</span>　聖遺物廻聖と剣闘士・楽団間において4op聖遺物の出現確率は有意差は認められなかった
+  <li>秘境と廻聖の4opの確率を予想した。<a href="#subop25">詳細</a></li>
+    　<span class="p_result">結果</span>　秘境は20.25±1.47%、廻聖・剣闘士・楽団は32.35%±2.20%<br>
+ </ol>
+ <h2 id="Overview1">全体の結果</h2>
+  <div class="box_3">
+   <p class="bigger">全体の結論</p>
+   <table>
+    <caption>4opの確率</caption>
+    <tbody class="td_border">
+     <thead> <tr class="td_border"><th class="td_left">どこからドロップしたか？</th> <th class="td_border">95%信頼区間</th> <th class="td_border">真の値を予想</th></tr> </thead>
+     <tr class="td_border"><td class="td_left">秘境</td> <td class="td_number">20.25±1.47%</td> <td class="td_number">20%</td></tr>
+     <tr class="td_border"><td class="td_left">廻聖・剣闘士・楽団</td> <td class="td_number">32.35±2.20%</td> <td class="td_number">33%</td></tr>
+    </tbody>
+   </table>
+  </div>
+
+<h1>本題<a class="anchor_super" name="MainTopic"></a></h1>
+ <h2>聖遺物ごとに4opの出現率に差はあるか？<a class="anchor_super" name="subop21"></a></h2>
+  <p>
+  聖遺物サブステータスは初期から4opついているものがある。その出現確立はおよそ20％と言われている。<br>
+  確かに本記事で使用した上記の<a href="#tab1">「この記事で使用した全データ」の表</a>を3opと4opに分けて確率を求めると24.43%になることからも分かる。
+  </p>
+  <p class="qote_p">しかしShino1154さんの記事冒頭で<a href="#quote_4">[4]</a><a class="anchor_super" name="quote_4_x"></a></p>
+   <blockquote cite="https://www.hoyolab.com/article/621879">
+     <p class="quote_margin2">「端的に言うと、楽団・剣闘士に限り、4OPの出現確率が高い気がする」</p>
+     <footer class="qote_footer">-【聖遺物統計】4OPの出現確率について②-<cite>Shino1154</cite></footer>
+   </blockquote>
+   <p>と述べてるように<br><span class="bigger">剣闘士・楽団は秘境から手に入る聖遺物とは4opの出現確率が違う可能性</span>が指摘されている。<br></p>
+   <p class="qote_p">またkinositaさんの記事の考察でも<a href="#quote_5">[5]</a><a class="anchor_super" name="quote_5_x"></a></p>
+   <blockquote cite="https://www.hoyolab.com/article/1201162">
+    <p class="quote_margin2">
+     聖遺物廻聖で入手できる聖遺物の4OP率は約30%と思われます。<br>
+     秘境から入手できる聖遺物の4OP率は約20%なので秘境とは異なります。
+    </p>
+    <footer class="qote_footer">-聖遺物廻聖統計　200回分-<cite>kinosita</cite></footer>
+   </blockquote>
+   <p>と述べられているように<br>
+   秘境と廻聖では聖遺物の4opの出現確立が異なる可能性があります。</p>
+   <p class="qote_p">またマグロヘッドさんの動画2:24においては<a href="#quote_3">[3]</a><a class="anchor_super" name="quote_3_x"></a></p>
+    <blockquote cite="https://youtu.be/0rmbY4_eph0?si=pu1KwbugAEbICdJZ&t=144">
+     <p class="quote_margin2">
+    「この結果を統計の分かる方に聞いてみましたが<br>
+    サンプル数が少ないので統計的には差がない<br>
+    「多いと言えるかも」ということでした」
+     </p>
+     <footer class="qote_footer">-【原神】新システム「聖遺物廻聖」は４オプションが出やすい！？統計をとった結果を公開します【げんしん】-<cite>マグロヘッド</cite></footer>
+    </blockquote>
+    <p>と述べられている。（孫引きになるうえ当人を当たれないのは許して欲しい、なんならサンプル数は少なくないと思うし統計的に差はあると言えるはず）<br></p>
+ <h3>kinositaさんとShino1154さんのデータの適合度検定</h3>
+  <p>
+  ここで今まで出現確率が同一だと考えられていた聖遺物の4opの出現確率が聖遺物ごとに違う可能性が示されてたため、まずkinositaさんのデータ<a href="#quote_1">[1]</a><a class="anchor_super" name="quote_1_x"></a>とShino1154さんのデータ<a href="#quote_2">[2]</a><a class="anchor_super" name="quote_2_x"></a>をカイ二乗検定にて適合度検定を行った。<br>
+  （これによって有意差が出た場合、聖遺物の種類（剣闘士やしめ縄など）ではない要因で聖遺物の4opの出現確率が変わる可能性が示唆される。<br>
+  しかし有意差が出なかったからと言って他の要因がある可能性を否定できないのは注意してください。）<br>
+  また雷、雷討ちはkinositaさんのデータがなかったため行わなかった。<br>
+  また翠緑と少女においては期待度数が10以下のセルがあったため参考にとどめるように。<br>
+  （イェイツの修正をすると意味のある数値になるらしいが、詳しく知らないし補正をかけた所で有意な差が見られるとは思えないので今回は行わない）<br>
+  また聖遺物廻聖のデータはkinositaさんのデータ<a href="#quote_1">[1]</a><a class="anchor_super" name="quote_1_x"></a>とマグロヘッドさんのデータ<a href="#quote_3">[3]</a><a class="anchor_super" name="quote_3_x"></a>を使用した。
+  </p>
+
+<p class="li_result">結果</p>
+ <div class="box_3">
+  <table class="tabA">
+   <caption>kinositaさんとShino1154さんのデータの聖遺物種類ごとの適合度検定</caption>
+   <tbody class="td_border">
+    <tr class="td_border"> <td class="td_left">剣闘士</td><td class="td_left">p=0.92</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=505)</td> </tr>
+    <tr class="td_border"> <td class="td_left">楽団</td><td class="td_left">p=0.97</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=484)</td> </tr>
+    <tr class="td_border"> <td class="td_left">翠緑</td><td class="td_left">p=0.93</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=138)</td> </tr>
+    <tr class="td_border"> <td class="td_left">少女</td><td class="td_left">p=0.40</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=130)</td> </tr>
+    <tr class="td_border"> <td class="td_left">魔女</td><td class="td_left">p=0.52</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=364)</td> </tr>
+    <tr class="td_border"> <td class="td_left">火渡り</td><td class="td_left">p=0.58</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=353)</td> </tr>
+    <tr class="td_border"> <td class="td_left">血染め</td><td class="td_left">p=0.57</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=154)</td> </tr>
+    <tr class="td_border"> <td class="td_left">旧貴族</td><td class="td_left">p=0.39</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=157)</td> </tr>
+    <tr class="td_border"> <td class="td_left">悠久</td><td class="td_left">p=0.064</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=179)</td> </tr>
+    <tr class="td_border"> <td class="td_left">逆飛び</td><td class="td_left">p=0.60</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=174)</td> </tr>
+    <tr class="td_border"> <td class="td_left">氷風</td><td class="td_left">p=0.72</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=284)</td> </tr>
+    <tr class="td_border"> <td class="td_left">沈淪</td><td class="td_left">p=0.012</td><td class="td_left"><span class="color_red">傾向が見られた<span></td><td class="td_border">(n=274)</td> </tr>
+    <tr class="td_border"> <td class="td_left">仙岩</td><td class="td_left">p=0.57</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=307)</td> </tr>
+    <tr class="td_border"> <td class="td_left">蒼白</td><td class="td_left">p=0.48</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=282)</td> </tr>
+    <tr class="td_border"> <td class="td_left">しめ縄</td><td class="td_left">p=0.64</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=581)</td> </tr>
+    <tr class="td_border"> <td class="td_left">絶縁</td><td class="td_left">p=0.43</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=557)</td> </tr>
+    <tr class="td_border"> <td class="td_left">華館</td><td class="td_left">p=0.91</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=463)</td> </tr>
+    <tr class="td_border"> <td class="td_left">海染</td><td class="td_left">p=0.46</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=473)</td> </tr>
+    <tr class="td_border"> <td class="td_left">廻聖</td><td class="td_left">p=0.89</td><td class="td_left">有意差があるとは言えない</td><td class="td_border">(n=2009)</td> </tr>
+   </tbody>
+  </table>
+ </div>
+<h4>結論</h4>
+ <p>
+  沈淪において、有意差があるとまでは言えないまでも偶然にして偏った結果が得られた。<br>
+  つまり、いまのデータでは
+ </p>
+ <p>「沈淪の4opの出現確率がkinositaさんとShino1154さんで違うのは偶然かもしれないしそうでないかもしれない」</p>
+ <p>としか言えないため、もっと多くのデータが必要です。<br>
+（ただでさえ歯切れの悪い話の中で更に歯切れの悪い結論が得られた）<br></p>
+
+<h3>kinositaさんとShino1154さんのデータ入手元ごとの適合度検定</h3>
+ <p>ここでサンプルサイズを大きくするため楽団と剣闘士、火渡りと魔女のように排出元が同じ聖遺物をまとめ、それに対しても適合度検定を行った。</p>
+ <div class="box_3">
+  <table>
+   <caption>kinositaさんとShino1154さんのデータ入手元ごとの適合度検定</caption>
+    <tbody class="td_border">
+     <tr class="td_border"> <td class="td_left">剣闘士・楽団</td><td class="td_border">p=0.97</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=989)</td> </tr>
+     <tr class="td_border"> <td class="td_left">翠緑・少女</td><td class="td_border">p=0.51</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=268)</td> </tr>
+     <tr class="td_border"> <td class="td_left">魔女・火渡り</td><td class="td_border">p=0.39</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=717)</td> </tr>
+     <tr class="td_border"> <td class="td_left">血染め・旧貴族</td><td class="td_border">p=0.33</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=311)</td> </tr>
+     <tr class="td_border"> <td class="td_left">悠久・逆飛び</td><td class="td_border">p=0.42</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=353)</td> </tr>
+     <tr class="td_border"> <td class="td_left">氷風・沈淪</td><td class="td_border">p=0.12</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=558)</td> </tr> 
+     <tr class="td_border"> <td class="td_left">仙岩・蒼白</td><td class="td_border">p=0.37</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=589)</td> </tr>
+     <tr class="td_border"> <td class="td_left">しめ縄・絶縁</td><td class="td_border">p=0.80</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=1136)</td> </tr>
+     <tr class="td_border"> <td class="td_left">華館・海染</td><td class="td_border">p=0.67</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=936)</td> </tr>
+   </tbody>
+  </table>
+ </div>
+<h4>結論</h4>
+ <p>沈淪に関しては氷風を混ぜたところP値は増加しP=0.12となった、もちろん同じ秘境であっても沈淪だけ、特殊な排出確率である可能性は否定できないが、18回検定を行ったので1.2%の偶然が起きる可能性は19.53%となり十分に起こりうるだろう。</p>
+   <details>
+   <summary>計算</summary>
+   <p>
+     1-(1-0.012)^18≒0.19531
+   </p>
+  </details>
+ <p>
+ 「4opの出現率がkinositaさんとShino1154さんで違うのは偶然の可能性が高い」
+ よってkinositaさんとShino1154を混ぜることを否定する積極的理由がなくなった。
+ </p>
+
+
+剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのか？
+
+ <p class="qote_p">上記の通りShino1154さんの記事では</p>
+  <blockquote cite="https://www.hoyolab.com/article/621879">
+    <p class="quote_margin2">
+     「端的に言うと、楽団・剣闘士に限り、4OPの出現確率が高い気がする」
+    </p>
+    <footer class="qote_footer">-【聖遺物統計】4OPの出現確率について②-<cite>Shino1154</cite></footer>
+   </blockquote>
+   <p>
+   と述べてるように。<a href="#quote_4">[4]</a><a class="anchor_super" name="quote_4_x"></a><br>
+    剣闘士・楽団は秘境から手に入る聖遺物とは4opの出現確率が違う可能性が指摘されている。<br>
+    そこで剣闘士と楽団間、剣闘士・楽団と秘境間でカイ二乗検定を行った。
+   </p>
+   
+<p class="li_result">結果</p>
+ <table>
+  <tbody class="td_border">
+   <tr class="td_border"> <td class="td_border">剣闘士・楽団</td><td class="td_border">p=0.84</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=989)</td> </tr>
+   <tr class="td_border"> <td class="td_border">剣闘士・楽団と秘境</td><td class="td_border">p<0.0001</td><td class="td_border">有意差があった</td><td class="td_border">(n=5982)</td> </tr>
+  </tbody>
+ </table>
+
+<h4>結論</h4>
+ <table>
+  <tbody class="td_border">
+   <tr class="td_border"> <td class="td_border">剣闘士と楽団では</td><td class="td_border">有意差が認められなかった。</td> </tr>
+   <tr class="td_border"> <td class="td_border">剣闘士・楽団と秘境間では</td><td class="td_border">有意な差が見られた。</td> </tr>
+  </tbody>
+ </table>
+
+
+秘境から出る聖遺物の中で4opが出現する確率が違う聖遺物はあるのか？
+
+ <p>
+  次に剣闘士、楽団において4op聖遺物の確率が秘境の聖遺物差があることが示されたので、秘境の聖遺物と他の秘境の聖遺物間で4opの出現確率に差があるかをカイ二乗検定によって求めた。<br>
+  （本来は全パターンすべきだが18C2=162パターンと膨大であるため本記事では実施しなかった）<br>
+  ただし雷において期待度数が10以下のセルがあったため参考にとどめるように。
+ </p>
+
+<p class="li_result">結果</p>
+ <table>
+  <tbody class="td_border">
+    <tr class="td_border"> <td class="td_border">雷と他の秘境</td><td class="td_border">p=0.24</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">雷打ちと他の秘境</td><td class="td_border">p=0.76</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">翠緑と他の秘境</td><td class="td_border">p=0.51</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">少女と他の秘境</td><td class="td_border">p=0.71</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">魔女と他の秘境</td><td class="td_border">p=0.72</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">火渡りと他の秘境</td><td class="td_border">p=0.45</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">血染めと他の秘境</td><td class="td_border">p=0.81</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">旧貴族と他の秘境</td><td class="td_border">p=0.29</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">悠久と他の秘境</td><td class="td_border">p=0.54</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">逆飛びと他の秘境</td><td class="td_border">p=0.092</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">氷風と他の秘境</td><td class="td_border">p=0.59</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">沈淪と他の秘境</td><td class="td_border">p=0.31</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">仙岩と他の秘境</td><td class="td_border">p=0.32</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">蒼白と他の秘境</td><td class="td_border">p=0.77</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">しめ縄と他の秘境</td><td class="td_border">p=0.47</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">絶縁と他の秘境</td><td class="td_border">p=0.89</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">華館と他の秘境</td><td class="td_border">p=0.49</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+    <tr class="td_border"> <td class="td_border">海染と他の秘境</td><td class="td_border">p=0.20</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
+  </tbody>
+ </table>
+
+
+<h4>結論</h4>
+ <p>秘境から出現する聖遺物間で有意差が認められるものはなかった。</p>
+  <p>聖遺物廻聖と秘境から手に入る聖遺物における4opの出現確立に差はあるか?</p>
+   <p class="qote_p">前述したようにkinositaさんの記事で</p>
+    <blockquote cite="https://www.hoyolab.com/article/1201162">
+     <p class="quote_margin2">「聖遺物廻聖で入手できる聖遺物の4OP率は約30%と思われます。<br>
+     秘境から入手できる聖遺物の4OP率は約20%なので秘境とは異なります。」</p>
+     <footer class="qote_footer">-聖遺物廻聖統計　200回分-<cite>kinosita</cite></footer>
+    </blockquote>
+    <p>と述べられているように。<a href="#quote_5">[5]</a><a class="anchor_super" name="quote_5_x"></a>
+     <p>秘境と廻聖では聖遺物の4OPの出現確立が異なる可能性があります。<br>
+       上記の結論により聖遺物間で区別する積極的な理由がないので秘境から入手できる聖遺物を1個のまとまりにし、<br>
+       聖遺物廻聖のデータはkinositaさんのデータ<a href="#quote_1">[1]</a><a class="anchor_super" name="quote_1_x"></a>に加えて
+       マグロヘッドさんの動画における数値<a href="#quote_3">[3]</a><a class="anchor_super" name="quote_3_x"></a>も使用し、秘境と廻聖間で4opの出現確率に差があるかをカイ二乗検定によって調べた。
+     </p>
+<p class="li_result">結果</p>
+ <table>
+  <tbody class="td_border"> <tr class="td_border"> <td class="td_border">秘境と廻聖間</td><td class="td_border">p<0.0001</td><td class="td_border">有意差があった</td><td class="td_border">(n=6973)</td> </tr> </tbody>
+ </table>
+<h4>結論</h4>
+ <p>よって</p>
+  <p>「秘境と聖遺物廻聖間において4op聖遺物の出現確率は有意な差が見られた」</p>
+
+<p>聖遺物廻聖と剣闘士・楽団における4opの出現確立に差はあるか?</p>
+<p>上記のように聖遺物廻聖と秘境、剣闘士・楽団と秘境は差があった。
+そこで聖遺物廻聖と剣闘士・楽団で差はあるかをカイ二乗検定で求めた。</p>
+
+<p class="li_result">結果</p>
+ <table>
+  <tbody class="td_border"> <tr class="td_border"> <td class="td_border">廻聖と剣闘士・楽団間</td><td class="td_border">p=0.16</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=3027)</td> </tr> </tbody>
+ </table>
+<h4>結論</h4>
+
+よって
+
+「聖遺物廻聖と剣闘士・楽団間において4op聖遺物の出現確率は有意差は認められない」
+
+よって聖遺物廻聖と剣闘士・楽団を混ぜ廻聖・剣闘士・楽団と呼ぶ。
+
+
+<p>秘境の聖遺物と聖遺物廻聖の4opの確率を推定</p>
+さて、そろそろ言いたいことがあるだろう？「結局何%なんだ？」と
+
+秘境産と廻聖・剣闘士・楽団の2種類を信頼区間99％で母比率を推定した。
+
+（つまり本当の出現確率は分からないけど「だいたい出現確率は20%を中心に±5%の範囲に入る」ってことは言える）
+
+<p class="li_result">結果</p>
+
+ <p>この結果は分かりやすくするため%表記で小数点以下3桁で四捨五入し、2種類で併記した。</p>
+
+ <table>
+  <tbody class="td_border">
+   <tr class="td_border"> <td class="td_border">秘境産</td><td class="td_border">18.77%≦20.25%≦21.72%</td><td class="td_border">(n=4964)</td> </tr>
+   <tr class="td_border"> <td class="td_border">廻聖・剣闘士・楽団産</td><td class="td_border">30.35%≦32.56%≦34.76%</td><td class="td_border">(n=2998)</td> </tr>
+  </tbody>
+ </table>
+<br>
+ <table>
+  <tbody class="td_border">
+   <tr class="td_border"> <td class="td_border">秘境産</td><td class="td_border">20.25±1.47%</td> </tr>
+   <tr class="td_border"> <td class="td_border">廻聖・剣闘士・楽団産</td><td class="td_border">32.56±2.20%</td> </tr>
+  </tbody>
+ </table>
+（※四捨五入しているため計算が合わない可能性があります）
+
+
+ <p>
+  ただし他の結果でも言える話ですが、2種類のデータが混じっていた場合など、前提が間違っていた場合はこの範囲に入らない可能性もあります。<br>
+  例えばこの記事で使用したデータを1個の「4op聖遺物の出現確率」として計算すると<br>
+  23.20%≦24.43%≦25.66%となり秘境産、廻聖産どちらも範囲に入りません。<br>
+  これは1%以下の奇跡が起きたわけではなく、前提が間違っていただけです。<br>
+  あくまで、P値は全ての前提が正しいと仮定したとき有効である点に注意してください。<br>
+  補足ではあるがこの真ん中にある20.25%、32.25%は(3op÷4op)で出すことができます。<br>
+  また信頼区間95％にした場合それぞれの幅が±1.12%、±2.05%になる。<br>
+ </p>
+
+<p>参考程度に、廻聖と剣闘士・楽団の4op確率も記載する。</p>
+ <table>
+  <tbody class="td_border">
+   <tr class="td_border"> <td class="td_border">廻聖</td><td class="td_border">29.66%≦32.35%≦35.05%</td> </tr>
+   <tr class="td_border"> <td class="td_border">剣闘士・楽団</td><td class="td_border">29.11%≦32.96%≦36.82%</td> </tr>
+  </tbody>
+ </table>
+
+<h4>結論</h4>
+<P>4op聖遺物の出現確率は信頼区間99%において</p>
+ <table>
+  <tbody class="td_border">
+   <tr class="td_border"> <td class="td_border">秘境産は</td><td class="td_border">18.77%≦20.25%≦21.72%</td><td class="td_border">(n=4964)</td> </tr>
+   <tr class="td_border"> <td class="td_border">廻聖・剣闘士・楽団産は</td><td class="td_border">30.35%≦32.56%≦34.76%</td><td class="td_border">(n=2998)</td> </tr>
+  </tbody>
+ </table>
+  <p class="qote_p">である、これは、おおよそ<br>kinositaさんの</p>
+    <blockquote cite="https://www.hoyolab.com/article/1201162">
+     <p class="quote_margin2">「聖遺物廻聖で入手できる聖遺物の4OP率は約30%と思われます。<br>
+      秘境から入手できる聖遺物の4OP率は約20%なので秘境とは異なります。」</p>
+     <footer class="qote_footer">-聖遺物廻聖統計　200回分-<cite>kinosita</cite></footer>
+    </blockquote>
+   <p>との予想<a href="#quote_5">[5]</a><a class="anchor_super" name="quote_5_x"></a><p>
+
+  <p class="qote_p">Shino1154さんの</p>
+     <blockquote cite="https://www.hoyolab.com/article/353211">
+     <p class="quote_margin2">「4OPの真の確率は20%」<a href="#quote_6">[6]</a><a class="anchor_super" name="quote_6_x"></a></p>
+     <footer class="qote_footer">-【聖遺物統計】4OPの出現確率について①-<cite>Shino1154</cite></footer>
+    </blockquote>
+   <p>との予想を支持する。</p>
+
+
+<h1><a class="anchor_super" name="Summary">総括</a></h1>
+ <ul>
+  <li>秘境と剣闘士・楽団間において4op聖遺物の出現確率は違う</li>
+  <li>秘境と聖遺物廻聖間において4op聖遺物の出現確率は違う</li>
+  <li>剣闘士・楽団と聖遺物廻聖間において4op聖遺物の出現確率は同じ</li>
+  <li>秘境産は18.77%≦20.25%≦21.72%</li>
+  <li>廻聖・剣闘士・楽団は29.66%≦32.35%≦35.05%</li>
+ </ul>
+
+
+
+<h3>筆者:詩藤イル</h3>
+<p>経緯</p>
+<p>HoYoLABに上げた記事をHTMLの練習のためブログとして作成した。</p>
+
+<h1><a class="anchor_super" name="References">引用文献</a></h1>
+ <ol>
+  <li><a class="anchor_super" name="quote_1"></a><a href="#quote_1_a">[a]</a>bcd
+   ver2.9までの聖遺物データ(著者:kinosita)(参照日:2023-02-15)<br><a href="https://www.hoyolab.com/article/7143039">https://www.hoyolab.com/article/7143039</a></li>
+  <li><a class="anchor_super" name="quote_2"></a><a href="#quote_2_a">[a]</a>
+   【聖遺物統計】重要データ一覧【3000個記念(著者:Shino1154)(参照日:2023-02-15)<br><a href="https://www.hoyolab.com/article/1819088">https://www.hoyolab.com/article/1819088</a></li>
+  <li><a class="anchor_super" name="quote_3"></a>
+   【原神】新システム「聖遺物廻聖」は４オプションが出やすい！？統計をとった結果を公開します【げんしん】(著者:マグロヘッド)(該当動画時間1:18~1:45)(参照日:2023-02-15)<br><a href="https://youtu.be/0rmbY4_eph0">https://youtu.be/0rmbY4_eph0</a></li>
+  <li><a class="anchor_super" name="quote_4"></a>
+   【聖遺物統計】4OPの出現確率について②(著者:Shino1154)(参照日:2023-02-15)<br><a href="https://www.hoyolab.com/article/621879">https://www.hoyolab.com/article/621879</a></li>
+  <li><a class="anchor_super" name="quote_5"></a>
+   聖遺物廻聖統計　200回分(著者:kinosita)(参照日:2023-02-15)<br><a href="https://www.hoyolab.com/article/1201162">https://www.hoyolab.com/article/1201162</a></li>
+  <li><a class="anchor_super" name="quote_6"></a>
+   【聖遺物統計】4OPの出現確率について①(著者:Shino1154)(参照日:2023-02-17)<br><a href="https://www.hoyolab.com/article/353211">https://www.hoyolab.com/article/353211</a></li>
+ </ol>
+ </div>
+</div>
+</body>
+</html>
