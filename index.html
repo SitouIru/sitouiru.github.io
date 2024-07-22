@@ -33,13 +33,11 @@
       <li> <a href="#MainTopic">本題</a> </li>
        <ul>
         <li> <a href="#subop1">聖遺物ごとに4opの出現率に差はあるか？</a> </li>
-         <ul>
-          <li> <a href="#subop21">剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのか？</a> </li>
-          <li> <a href="#subop22">秘境から出る聖遺物の中で4opが出現する確率が違う聖遺物はあるのか？</a> </li>
-          <li> <a href="#subop23">聖遺物廻聖と秘境から手に入る聖遺物における4opの出現確立に差はあるか?</a> </li>
-          <li> <a href="#subop24">聖遺物廻聖と剣闘士・楽団における4opの出現確立に差はあるか?</a> </li>
-          <li> <a href="#subop25">秘境の聖遺物と聖遺物廻聖の4opの確率を推定</a> </li>
-         </ul>
+        <li> <a href="#subop2">剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのか？</a> </li>
+        <li> <a href="#subop3">秘境から出る聖遺物の中で4opが出現する確率が違う聖遺物はあるのか？</a> </li>
+        <li> <a href="#subop4">聖遺物廻聖と秘境から手に入る聖遺物における4opの出現確立に差はあるか?</a> </li>
+        <li> <a href="#subop5">聖遺物廻聖と剣闘士・楽団における4opの出現確立に差はあるか?</a> </li>
+        <li> <a href="#subop6">秘境の聖遺物と聖遺物廻聖の4opの確率を推定</a> </li>
        </ul>
       <li> <a href="#Summary">総括</a> </li>
       <li> <a href="#References">引用文献</a> </li>
@@ -127,7 +125,8 @@
   また大文字で3OP、4OPと記載するのが一般的だと思うが<br>可読性の低下を招いている（40や30に見えてしまう）ので3op、4opと記載する。
   <!--画像で4OPと3OPの画像が欲しい-->
   </p>
-  <p>以後、聖遺物に関しては略称を用いるため、略称の一覧表を作成</p>
+   <img src="images/3op4op.png">
+  <p>以後、聖遺物に関しては略称を用いるため、略称の一覧表を記載</p>
   <details>
    <summary>聖遺物などの略称</summary>
    <div class="box_2">
@@ -206,6 +205,7 @@
  またP値で示したことは統計をみたことがある人にとっても見やすくなっているはずだ。
 </p>
 <h1 id="Overview">要約</h1>
+ <img src="images/記事用4op確率4.png" width="860">
  <ol start="0">
   <li>聖遺物の4op出現確率が聖遺物の種類ごとに違う可能性が既に指摘されている。<a href="#quote_4">[4]</a><a class="anchor_super" name="quote_4_x"></a><a href="#quote_5">[5]</a><a class="anchor_super" name="quote_5_x"></a></ul>
   <li>見えていない要因で他にも出現確率が違わないか、kinositaさんとShino1154さんのデータを比べて不自然に偏った確率になってないかを調べた。<a href="#subop21">詳細</a></li>
@@ -222,7 +222,7 @@
     　<span class="p_result">結果</span>　秘境は20.25±1.47%、廻聖・剣闘士・楽団は32.35%±2.20%<br>
  </ol>
  <h2 id="Overview1">全体の結果</h2>
-  <div class="box_3">
+  <div class="result_box1">
    <p class="bigger">全体の結論</p>
    <table>
     <caption>4opの確率</caption>
@@ -235,7 +235,7 @@
   </div>
 
 <h1>本題<a class="anchor_super" name="MainTopic"></a></h1>
- <h2>聖遺物ごとに4opの出現率に差はあるか？<a class="anchor_super" name="subop21"></a></h2>
+ <h2>聖遺物ごとに4opの出現率に差はあるか？<a class="anchor_super" name="subop1"></a></h2>
   <p>
   聖遺物サブステータスは初期から4opついているものがある。その出現確立はおよそ20％と言われている。<br>
   確かに本記事で使用した上記の<a href="#tab1">「この記事で使用した全データ」の表</a>を3opと4opに分けて確率を求めると24.43%になることからも分かる。
@@ -278,7 +278,7 @@
   </p>
 
 <p class="li_result">結果</p>
- <div class="box_3">
+ <div class="result_box1">
   <table class="tabA">
    <caption>kinositaさんとShino1154さんのデータの聖遺物種類ごとの適合度検定</caption>
    <tbody class="td_border">
@@ -304,18 +304,17 @@
    </tbody>
   </table>
  </div>
-<h4>結論</h4>
- <p>
-  沈淪において、有意差があるとまでは言えないまでも偶然にして偏った結果が得られた。<br>
-  つまり、いまのデータでは
- </p>
- <p>「沈淪の4opの出現確率がkinositaさんとShino1154さんで違うのは偶然かもしれないしそうでないかもしれない」</p>
- <p>としか言えないため、もっと多くのデータが必要です。<br>
-（ただでさえ歯切れの悪い話の中で更に歯切れの悪い結論が得られた）<br></p>
+<h4   class="h4_result">結論</h4>
+ <div class="h4_result_box">
+  <p>沈淪において、有意差があるとまでは言えないまでも偶然にして偏った結果が得られた。<br>つまり、いまのデータでは</p>
+  <p  class="bigger">「沈淪の4opの出現確率がkinositaさんとShino1154さんで違うのは<br>偶然かもしれないしそうでないかもしれない」</p>
+  <p>としか言えないため、もっと多くのデータが必要です。<br>（ただでさえ歯切れの悪い話の中で更に歯切れの悪い結論が得られた）<br></p>
+ </div>
 
 <h3>kinositaさんとShino1154さんのデータ入手元ごとの適合度検定</h3>
  <p>ここでサンプルサイズを大きくするため楽団と剣闘士、火渡りと魔女のように排出元が同じ聖遺物をまとめ、それに対しても適合度検定を行った。</p>
- <div class="box_3">
+ <p class="li_result">結果</p>
+ <div class="result_box1">
   <table>
    <caption>kinositaさんとShino1154さんのデータ入手元ごとの適合度検定</caption>
     <tbody class="td_border">
@@ -331,21 +330,15 @@
    </tbody>
   </table>
  </div>
-<h4>結論</h4>
- <p>沈淪に関しては氷風を混ぜたところP値は増加しP=0.12となった、もちろん同じ秘境であっても沈淪だけ、特殊な排出確率である可能性は否定できないが、18回検定を行ったので1.2%の偶然が起きる可能性は19.53%となり十分に起こりうるだろう。</p>
-   <details>
-   <summary>計算</summary>
-   <p>
-     1-(1-0.012)^18≒0.19531
-   </p>
-  </details>
- <p>
- 「4opの出現率がkinositaさんとShino1154さんで違うのは偶然の可能性が高い」
- よってkinositaさんとShino1154を混ぜることを否定する積極的理由がなくなった。
- </p>
+<h4   class="h4_result">結論</h4>
+ <div class="h4_result_box">
+  <p>沈淪に関しては氷風を混ぜたところP値は増加しP=0.12となった、もちろん同じ秘境であっても沈淪だけ、特殊な排出確率である可能性は否定できないが、18回検定を行ったので1.2%の偶然が起きる可能性は19.53%となり十分に起こりうるだろう。</p>
+   <p>計算 1-(1-0.012)^18≒0.19531</p>
+  <p>「4opの出現率がkinositaさんとShino1154さんで違うのは偶然の可能性が高い」<br>
+  よってkinositaさんとShino1154を混ぜることを否定する積極的理由がなくなった。</p>
+ </div>
 
-
-剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのか？
+<h2>剣闘士・楽団は秘境から出る聖遺物と4opが出現する確率が違うのか？<a class="anchor_super" name="subop2"></h2>
 
  <p class="qote_p">上記の通りShino1154さんの記事では</p>
   <blockquote cite="https://www.hoyolab.com/article/621879">
@@ -361,32 +354,31 @@
    </p>
    
 <p class="li_result">結果</p>
- <table>
-  <tbody class="td_border">
-   <tr class="td_border"> <td class="td_border">剣闘士・楽団</td><td class="td_border">p=0.84</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=989)</td> </tr>
-   <tr class="td_border"> <td class="td_border">剣闘士・楽団と秘境</td><td class="td_border">p<0.0001</td><td class="td_border">有意差があった</td><td class="td_border">(n=5982)</td> </tr>
-  </tbody>
- </table>
+ <div class="result_box1">
+  <table>
+   <caption>剣闘士と楽団間の4OPの出現率、剣闘士・楽団と秘境間の4OPの出現率</caption>
+   <tbody class="td_border">
+    <tr class="td_border"> <td class="td_border">剣闘士・楽団</td><td class="td_border">p=0.84</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=989)</td> </tr>
+    <tr class="td_border"> <td class="td_border">剣闘士・楽団と秘境</td><td class="td_border">p<0.0001</td><td class="td_border">有意差があった</td><td class="td_border">(n=5982)</td> </tr>
+   </tbody>
+  </table>
+ </div>
+<h4   class="h4_result">結論</h4>
+ <div class="h4_result_box">
+  <p>つまり剣闘士と楽団では4opの出現確率はほぼ等しいのに対して。<br>剣闘士・楽団の4opの確率と秘境間での聖遺物の4opの確率には差が認められた</p>
+ </div>
 
-<h4>結論</h4>
- <table>
-  <tbody class="td_border">
-   <tr class="td_border"> <td class="td_border">剣闘士と楽団では</td><td class="td_border">有意差が認められなかった。</td> </tr>
-   <tr class="td_border"> <td class="td_border">剣闘士・楽団と秘境間では</td><td class="td_border">有意な差が見られた。</td> </tr>
-  </tbody>
- </table>
-
-
-秘境から出る聖遺物の中で4opが出現する確率が違う聖遺物はあるのか？
+<h2>秘境から出る聖遺物の中で4opが出現する確率が違う聖遺物はあるのか？<a class="anchor_super" name="subop3"></h2>
 
  <p>
   次に剣闘士、楽団において4op聖遺物の確率が秘境の聖遺物差があることが示されたので、秘境の聖遺物と他の秘境の聖遺物間で4opの出現確率に差があるかをカイ二乗検定によって求めた。<br>
-  （本来は全パターンすべきだが18C2=162パターンと膨大であるため本記事では実施しなかった）<br>
-  ただし雷において期待度数が10以下のセルがあったため参考にとどめるように。
+  （本来は全パターンすべきだが18C2=162パターンと膨大であるため本記事では実施しなかった）<br>ただし雷において期待度数が10以下のセルがあったため参考にとどめるように。
  </p>
 
 <p class="li_result">結果</p>
+ <div class="result_box1">
  <table>
+  <caption>秘境の聖遺物間の適合度検定</caption>
   <tbody class="td_border">
     <tr class="td_border"> <td class="td_border">雷と他の秘境</td><td class="td_border">p=0.24</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
     <tr class="td_border"> <td class="td_border">雷打ちと他の秘境</td><td class="td_border">p=0.76</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
@@ -408,11 +400,14 @@
     <tr class="td_border"> <td class="td_border">海染と他の秘境</td><td class="td_border">p=0.20</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=4964)</td> </tr>
   </tbody>
  </table>
+ </div>
 
-
-<h4>結論</h4>
- <p>秘境から出現する聖遺物間で有意差が認められるものはなかった。</p>
-  <p>聖遺物廻聖と秘境から手に入る聖遺物における4opの出現確立に差はあるか?</p>
+<h4 class="h4_result">結論</h4>
+ <div class="h4_result_box">
+  <p>秘境から出現する聖遺物間で有意差が認められるものはなかった。</p>
+ </div>
+ 
+<h2>聖遺物廻聖と秘境から手に入る聖遺物における4opの出現確立に差はあるか?<a class="anchor_super" name="subop5"></h2>
    <p class="qote_p">前述したようにkinositaさんの記事で</p>
     <blockquote cite="https://www.hoyolab.com/article/1201162">
      <p class="quote_margin2">「聖遺物廻聖で入手できる聖遺物の4OP率は約30%と思われます。<br>
@@ -425,84 +420,74 @@
        聖遺物廻聖のデータはkinositaさんのデータ<a href="#quote_1">[1]</a><a class="anchor_super" name="quote_1_x"></a>に加えて
        マグロヘッドさんの動画における数値<a href="#quote_3">[3]</a><a class="anchor_super" name="quote_3_x"></a>も使用し、秘境と廻聖間で4opの出現確率に差があるかをカイ二乗検定によって調べた。
      </p>
+     
 <p class="li_result">結果</p>
+ <div class="result_box1">
  <table>
-  <tbody class="td_border"> <tr class="td_border"> <td class="td_border">秘境と廻聖間</td><td class="td_border">p<0.0001</td><td class="td_border">有意差があった</td><td class="td_border">(n=6973)</td> </tr> </tbody>
+  <tbody> <tr> <td>秘境と廻聖間</td><td>p<0.0001</td><td>有意差があった</td><td>(n=6973)</td> </tr> </tbody>
  </table>
-<h4>結論</h4>
- <p>よって</p>
+ </div>
+<h4   class="h4_result">結論</h4>
+ <div class="h4_result_box">
   <p>「秘境と聖遺物廻聖間において4op聖遺物の出現確率は有意な差が見られた」</p>
+ </div>
 
-<p>聖遺物廻聖と剣闘士・楽団における4opの出現確立に差はあるか?</p>
-<p>上記のように聖遺物廻聖と秘境、剣闘士・楽団と秘境は差があった。
-そこで聖遺物廻聖と剣闘士・楽団で差はあるかをカイ二乗検定で求めた。</p>
-
-<p class="li_result">結果</p>
- <table>
-  <tbody class="td_border"> <tr class="td_border"> <td class="td_border">廻聖と剣闘士・楽団間</td><td class="td_border">p=0.16</td><td class="td_border">有意差があるとは言えない</td><td class="td_border">(n=3027)</td> </tr> </tbody>
- </table>
-<h4>結論</h4>
-
-よって
-
-「聖遺物廻聖と剣闘士・楽団間において4op聖遺物の出現確率は有意差は認められない」
-
-よって聖遺物廻聖と剣闘士・楽団を混ぜ廻聖・剣闘士・楽団と呼ぶ。
-
-
-<p>秘境の聖遺物と聖遺物廻聖の4opの確率を推定</p>
-さて、そろそろ言いたいことがあるだろう？「結局何%なんだ？」と
-
-秘境産と廻聖・剣闘士・楽団の2種類を信頼区間99％で母比率を推定した。
-
-（つまり本当の出現確率は分からないけど「だいたい出現確率は20%を中心に±5%の範囲に入る」ってことは言える）
+<h2>聖遺物廻聖と剣闘士・楽団における4opの出現確立に差はあるか?</li><a class="anchor_super" name="subop1"></h2>
+ <p>上記のように聖遺物廻聖と秘境、剣闘士・楽団と秘境は差があった。<br>
+ そこで聖遺物廻聖と剣闘士・楽団で差はあるかをカイ二乗検定で求めた。</p>
 
 <p class="li_result">結果</p>
-
- <p>この結果は分かりやすくするため%表記で小数点以下3桁で四捨五入し、2種類で併記した。</p>
-
+ <div class="result_box1">
  <table>
-  <tbody class="td_border">
-   <tr class="td_border"> <td class="td_border">秘境産</td><td class="td_border">18.77%≦20.25%≦21.72%</td><td class="td_border">(n=4964)</td> </tr>
-   <tr class="td_border"> <td class="td_border">廻聖・剣闘士・楽団産</td><td class="td_border">30.35%≦32.56%≦34.76%</td><td class="td_border">(n=2998)</td> </tr>
-  </tbody>
+  <tbody> <tr> <td>廻聖と剣闘士・楽団間</td><td>p=0.16</td><td>有意差があるとは言えない</td><td>(n=3027)</td> </tr> </tbody>
  </table>
-<br>
- <table>
-  <tbody class="td_border">
-   <tr class="td_border"> <td class="td_border">秘境産</td><td class="td_border">20.25±1.47%</td> </tr>
-   <tr class="td_border"> <td class="td_border">廻聖・剣闘士・楽団産</td><td class="td_border">32.56±2.20%</td> </tr>
-  </tbody>
- </table>
-（※四捨五入しているため計算が合わない可能性があります）
+ </div>
+<h4 class="h4_result">結論</h4>
+ <div class="h4_result_box">
+  <p><span class="bigger">「聖遺物廻聖と剣闘士・楽団間において4op聖遺物の出現確率は有意差は認められない」</span>
+  <br>よって聖遺物廻聖と剣闘士・楽団を混ぜ廻聖・剣闘士・楽団と呼ぶ。</p>
+ </div>
 
-
- <p>
-  ただし他の結果でも言える話ですが、2種類のデータが混じっていた場合など、前提が間違っていた場合はこの範囲に入らない可能性もあります。<br>
-  例えばこの記事で使用したデータを1個の「4op聖遺物の出現確率」として計算すると<br>
-  23.20%≦24.43%≦25.66%となり秘境産、廻聖産どちらも範囲に入りません。<br>
-  これは1%以下の奇跡が起きたわけではなく、前提が間違っていただけです。<br>
-  あくまで、P値は全ての前提が正しいと仮定したとき有効である点に注意してください。<br>
-  補足ではあるがこの真ん中にある20.25%、32.25%は(3op÷4op)で出すことができます。<br>
-  また信頼区間95％にした場合それぞれの幅が±1.12%、±2.05%になる。<br>
+<h2>秘境の聖遺物と聖遺物廻聖の4opの確率を推定<a class="anchor_super" name="subop6"></h2>
+ <p>さて、そろそろ言いたいことがあるだろう？「結局何%なんだ？」と<br>
+  秘境産と廻聖・剣闘士・楽団の2種類を信頼区間99％で母比率を推定した。<br>
+ （つまり本当の出現確率は分からないけど「真の出現確率は20%を中心に±5%の範囲に入る場合が多い」ってことは言える）
  </p>
-
-<p>参考程度に、廻聖と剣闘士・楽団の4op確率も記載する。</p>
- <table>
-  <tbody class="td_border">
-   <tr class="td_border"> <td class="td_border">廻聖</td><td class="td_border">29.66%≦32.35%≦35.05%</td> </tr>
-   <tr class="td_border"> <td class="td_border">剣闘士・楽団</td><td class="td_border">29.11%≦32.96%≦36.82%</td> </tr>
-  </tbody>
- </table>
-
-<h4>結論</h4>
-<P>4op聖遺物の出現確率は信頼区間99%において</p>
- <table>
-  <tbody class="td_border">
-   <tr class="td_border"> <td class="td_border">秘境産は</td><td class="td_border">18.77%≦20.25%≦21.72%</td><td class="td_border">(n=4964)</td> </tr>
-   <tr class="td_border"> <td class="td_border">廻聖・剣闘士・楽団産は</td><td class="td_border">30.35%≦32.56%≦34.76%</td><td class="td_border">(n=2998)</td> </tr>
-  </tbody>
- </table>
+<p class="li_result">結果</p>
+ <div class="result_box1">
+  <p>この結果は分かりやすくするため%表記で小数点以下3桁で四捨五入し、2種類で併記した。</p>
+   <table>
+    <tbody >
+     <tr > <td >秘境産</td><td >18.77%≦20.25%≦21.72%</td><td >(n=4964)</td> </tr>
+     <tr > <td >廻聖・剣闘士・楽団産</td><td >30.35%≦32.56%≦34.76%</td><td >(n=2998)</td> </tr>
+    </tbody>
+   </table>
+  <br>
+   <table>
+    <tbody >
+     <tr > <td >秘境産</td><td >20.25±1.47%</td> </tr>
+     <tr > <td >廻聖・剣闘士・楽団産</td><td >32.56±2.20%</td> </tr>
+    </tbody>
+   </table>
+  （※四捨五入しているため計算が合わない可能性があります）
+ <p>ただし他の結果でも言える話ですが、2種類のデータが混じっていた場合など、前提が間違っていた場合はこの範囲に入らない可能性もあります。</p>
+  
+  <p>例えばこの記事で使用したデータを1個の「4op聖遺物の出現確率」として計算すると<br>
+    23.20%≦24.43%≦25.66%となり秘境産、廻聖産どちらも範囲に入りません。</p>
+  <p><span class="big_red">これは1%以下の奇跡が起きたわけではなく</span>、前提が間違っていただけです。<br>
+   あくまで、P値は<span class="big_red">全ての前提が正しいとき</span>有効である点に注意してください。<br>
+   補足ではあるが、信頼区間95％にした場合それぞれの幅が±1.12%、±2.05%になる。<br>
+  </p>
+ </div>
+<h4   class="h4_result">結論</h4>
+ <div class="h4_result_box">
+  <table>
+   <caption>4op聖遺物の出現確率は信頼区間99%において</caption>
+    <tbody>
+     <tr> <td>秘境産は</td><td>18.77%≦20.25%≦21.72%</td><td>(n=4964)</td> </tr>
+     <tr> <td>廻聖・剣闘士・楽団産は</td><td>30.35%≦32.56%≦34.76%</td><td>(n=2998)</td> </tr>
+    </tbody>
+   </table>
   <p class="qote_p">である、これは、おおよそ<br>kinositaさんの</p>
     <blockquote cite="https://www.hoyolab.com/article/1201162">
      <p class="quote_margin2">「聖遺物廻聖で入手できる聖遺物の4OP率は約30%と思われます。<br>
@@ -517,7 +502,7 @@
      <footer class="qote_footer">-【聖遺物統計】4OPの出現確率について①-<cite>Shino1154</cite></footer>
     </blockquote>
    <p>との予想を支持する。</p>
-
+ </div>
 
 <h1><a class="anchor_super" name="Summary">総括</a></h1>
  <ul>
