@@ -16,12 +16,6 @@
    width: 720px;
 }
 
-.box_3{
-   padding: 1px 20px 20px;              /* 余白指定 */
-   margin:  0 auto;            /* 中央寄せ */
-   border: solid 2px #e6b422;; /*実線 1px 黒*/
-}
-
 p{
    padding: 1px 20px;              /* 余白指定 上下、左右*/
 }
@@ -33,8 +27,13 @@ p{
 }
 .color_red{
   color: red;
+  font-weight: bold;
 }
-
+.big_red{
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
 
 .p_result{
   color: #e6b422;
@@ -46,6 +45,23 @@ p{
   color: #e6b422;
   font-size: 24px;
   font-weight: bold;
+}
+
+.result_box1{
+   padding: 20px 20px 20px;              /* 余白指定 */
+   margin:  0 auto;            /* 中央寄せ */
+   border: solid 2px #e6b422; /*実線 1px 黄金*/
+}
+
+.h4_result{
+  color: #cd5e3c;
+  font-size: 24px;
+  font-weight: bold;
+}
+.h4_result_box{
+   padding: 1px 20px 1px 20px;              /* 余白指定 */
+   margin:  0 auto;            /* 中央寄せ */
+   border: solid 2px #cd5e3c; /*実線 1px 樺*/
 }
 
 
